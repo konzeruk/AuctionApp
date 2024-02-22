@@ -6,7 +6,7 @@ namespace AuctionApp.Service.Core.ContextDB
     public class ApplicationContextProduct:DbContext
     {
         public DbSet<ProductEntity> Product { get; set; } = null!;
-        public ApplicationContextProduct(bool create)
+        public ApplicationContextProduct(bool create = false)
         {
             if (create)
                 Database.EnsureCreated();
