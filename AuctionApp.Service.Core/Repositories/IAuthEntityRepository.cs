@@ -4,6 +4,6 @@ namespace AuctionApp.Service.Core.Repositories
 {
     public interface IAuthEntityRepository
     {
-        public Task<AuthEntity?> GetUser(string login, string password);
+        public Task<AuthEntity?> GetUserAsync(string login, string password);
     }
 }

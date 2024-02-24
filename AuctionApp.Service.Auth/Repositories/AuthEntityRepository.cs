@@ -8,12 +8,13 @@ namespace AuctionApp.Service.Auth.Repositories
 {
     public class AuthEntityRepository : IAuthEntityRepository
     {
-        private ApplicationContextAuth context{ get; set; } = null!;
+        private ApplicationContextAuth context;
 
-        public AuthEntityRepository(ApplicationContextAuth context) =>
+        public AuthEntityRepository(ApplicationContextAuth context)=>
             this.context = context;
+        
 
-        public async Task<AuthEntity?> GetUser(string login, string password)=>
+        public async Task<AuthEntity?> GetUserAsync(string login, string password)=>
             await context
             .Auth
             .Where(x => x.Login == login && x.Password == password)

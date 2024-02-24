@@ -1,13 +1,9 @@
-﻿using AuctionApp.Service.Core.Models.Entities;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-namespace AuctionApp.Service.Core.Models.DTO.Response
+namespace AuctionApp.Service.Core.Models.DTO
 {
-    public class ProductModelResponse
+    public class ProductModel
     {
-        [JsonProperty("id")]
-        public int Id { get; set; }
-
         [JsonProperty("name")]
         public string Name { get; set; }
 

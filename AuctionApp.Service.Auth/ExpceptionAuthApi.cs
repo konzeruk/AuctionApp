@@ -1,16 +1,9 @@
-﻿using AuctionApp.Service.Core.Exceptions;
-
-namespace AuctionApp.Service.Auth
+﻿namespace AuctionApp.Service.Auth
 {
-    public class ExpceptionAuthApi:IExceptionApi
+    public static class ExpceptionAuthApi
     {
-        public ApiError ErrorDatabase()=>
-            new ApiError() { Code = ErrorCode.ErrorDatabase, Message = "Ошибка базы данных" };
+        public const string IncorrectData = "Логин или пароль были введены не верно";
 
-        public ApiError IncorrectData() =>
-            new ApiError() { Code = ErrorCode.IncorrectData, Message = "Логин или пароль были введены не верно" };
-
-        public ApiError NotFoundEntry() =>
-            new ApiError() { Code = ErrorCode.NotFoundEntry, Message = "Пользователь не был найден" };
+        public const string NotFoundUser = "Пользователь не был найден";
     }
 }

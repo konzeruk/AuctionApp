@@ -10,7 +10,7 @@ namespace AuctionApp.Service.Core.ContextDB
                 .SetBasePath(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory)!.FullName)
                 .AddJsonFile("config.json", optional: false, reloadOnChange: true)
                 .Build();
-
+          
             return configuration.GetConnectionString(nameDb)!;
         }
     }

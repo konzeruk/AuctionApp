@@ -1,6 +1,21 @@
-﻿namespace AuctionApp.Service.Core.Repositories
+﻿using AuctionApp.Service.Core.Models.Entities;
+
+namespace AuctionApp.Service.Core.Repositories
 {
-    internal interface IProductEntityRepository
+    public interface IProductEntityRepository
     {
+        public Task AddProductAsync(ProductEntity productEntity);
+
+        public Task UpdataProductAsync(ProductEntity productEntity);
+
+        public Task DeleteProductAsync(ProductEntity productEntity);
+
+        public Task<ProductEntity?> GetProductAsync(int id);
+
+        public Task<IEnumerable<ProductEntity>?> GetAllProductByCategoryAsync(int categoryId);
+
+        public Task<IEnumerable<CategoryEntity>?> GetAllCategoryAsync();
+
+        public Task<CategoryEntity?> GetCategoryIdByNameAsync(string name);
     }
 }
