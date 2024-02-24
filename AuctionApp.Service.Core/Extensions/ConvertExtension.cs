@@ -20,7 +20,23 @@ namespace AuctionApp.Service.Core.Extensions
             new CategoryModel()
             {
                 Id = categoryEntity.Id,
-                Name = categoryEntity.Name,
+                Name = categoryEntity.Name
+            };
+
+        public static BargainingModel ToBargainingModel(this BargainingEntity bargainingEntity) =>
+            new BargainingModel()
+            {
+                ProductId = bargainingEntity.ProductId,
+                UserId = bargainingEntity.UserId,
+                Price = bargainingEntity.Price
+            };
+
+        public static BargainingEntity ToBargainingEntity(this BargainingModel bargainingModel) =>
+            new BargainingEntity()
+            {
+                ProductId = bargainingModel.ProductId,
+                UserId = bargainingModel.UserId,
+                Price = bargainingModel.Price
             };
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AuctionApp.Service.Core.ContextDB
 {
-    public class ApplicationContextProduct:DbContext
+    public class ApplicationContextProduct : DbContext
     {
         public DbSet<ProductEntity> Product { get; set; } = null!;
         public DbSet<CategoryEntity> Category { get; set; } = null!;
@@ -16,6 +16,6 @@ namespace AuctionApp.Service.Core.ContextDB
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             optionsBuilder.UseSqlServer(Utils.GetConnectionString(Constants.ProductDB));
-        
+
     }
 }

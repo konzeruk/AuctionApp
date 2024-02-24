@@ -21,7 +21,7 @@ namespace AuctionApp.Service.StorageProduct.Controllers
         }
 
         [HttpPost("addProduct")]
-        public async Task<ActionResult> AddProduct([FromBody] ProductModel productModel)
+        public async Task<ActionResult> AddProductAsync([FromBody] ProductModel productModel)
         {
             try
             {
@@ -47,14 +47,14 @@ namespace AuctionApp.Service.StorageProduct.Controllers
             }
             catch (Exception ex)
             {
-                logger.LogInformation($"{typeof(StorageProductController)}.AddProduct : {ex.Message}");
+                logger.LogInformation($"{typeof(StorageProductController)}.AddProductAsync : {ex.Message}");
 
                 return Problem(ex.Message, statusCode: 500);
             }
         }
 
         [HttpPost("updataPriceProduct/{id:int}/{price:double}")]
-        public async Task<ActionResult> UpdataPriceProduct([FromRoute] int id, [FromRoute] double price)
+        public async Task<ActionResult> UpdataPriceProductAsync([FromRoute] int id, [FromRoute] double price)
         {
             try
             {
@@ -76,14 +76,14 @@ namespace AuctionApp.Service.StorageProduct.Controllers
             }
             catch (Exception ex)
             {
-                logger.LogInformation($"{typeof(StorageProductController)}.UpdataProduct : {ex.Message}");
+                logger.LogInformation($"{typeof(StorageProductController)}.UpdataPriceProductAsync : {ex.Message}");
 
                 return Problem(ex.Message, statusCode: 500);
             }
         }
 
         [HttpDelete("deleteProduct/{id:int}")]
-        public async Task<ActionResult> DeleteProduct([FromRoute] int id)
+        public async Task<ActionResult> DeleteProductAsync([FromRoute] int id)
         {
             try
             {
@@ -103,14 +103,14 @@ namespace AuctionApp.Service.StorageProduct.Controllers
             }
             catch (Exception ex)
             {
-                logger.LogInformation($"{typeof(StorageProductController)}.DeleteProduct : {ex.Message}");
+                logger.LogInformation($"{typeof(StorageProductController)}.DeleteProductAsync : {ex.Message}");
 
                 return Problem(ex.Message, statusCode: 500);
             }
         }
 
         [HttpGet("getAllProduct/{categoryId:int}")]
-        public async Task<ActionResult> GetAllProduct([FromRoute] int categoryId)
+        public async Task<ActionResult> GetAllProductAsync([FromRoute] int categoryId)
         {
             try
             {
@@ -133,14 +133,14 @@ namespace AuctionApp.Service.StorageProduct.Controllers
             }
             catch(Exception ex)
             {
-                logger.LogInformation($"{typeof(StorageProductController)}.GetAllProduct : {ex.Message}");
+                logger.LogInformation($"{typeof(StorageProductController)}.GetAllProductAsync : {ex.Message}");
 
                 return Problem(ex.Message, statusCode: 500);
             }
         }
 
         [HttpGet("getAllCategory")]
-        public async Task<ActionResult> GetAllCategory()
+        public async Task<ActionResult> GetAllCategoryAsync()
         {
             try
             {
@@ -161,7 +161,7 @@ namespace AuctionApp.Service.StorageProduct.Controllers
             catch(Exception ex)
             {
 
-                logger.LogInformation($"{typeof(StorageProductController)}.GetAllCategory : {ex.Message}");
+                logger.LogInformation($"{typeof(StorageProductController)}.GetAllCategoryAsync : {ex.Message}");
 
                 return Problem(ex.Message, statusCode: 500);
             }

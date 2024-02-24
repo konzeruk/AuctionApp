@@ -3,17 +3,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AuctionApp.Service.Core.ContextDB
 {
-    public class ApplicationContextAuth : DbContext
+    public class ApplicationContextBargaining : DbContext
     {
-        public DbSet<AuthEntity> Auth { get; set; } = null!;
-        public ApplicationContextAuth(bool create = false)
+        public DbSet<BargainingEntity> Bargaining { get; set; } = null!;
+        public ApplicationContextBargaining(bool create = false)
         {
             if (create)
                 Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
-            optionsBuilder.UseSqlServer(Utils.GetConnectionString(Constants.AuthDB));
-
+            optionsBuilder.UseSqlServer(Utils.GetConnectionString(Constants.BargainingDB));
     }
 }

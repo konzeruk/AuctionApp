@@ -4,5 +4,6 @@
     {
         public const string AuthDB = "Auth";
         public const string ProductDB = "Product";
+        public const string BargainingDB = "Bargaining";
     }
 }

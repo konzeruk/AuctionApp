@@ -10,5 +10,8 @@ namespace AuctionApp.Service.Core
 
         public static DbContext GetContextProductDB(bool create = false) =>
             new ApplicationContextProduct(create);
+
+        public static DbContext GetContextBargainingDB(bool create = false) =>
+            new ApplicationContextBargaining(create);
     }
 }
