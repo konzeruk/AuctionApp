@@ -20,18 +20,16 @@ namespace AuctionApp.Service.Bargaining.Controllers
         }
 
         [HttpPost("newBid")]
-        public async Task<ActionResult> newBidAsync([FromBody] BargainingModel bargainingModel)
+        public async Task<ActionResult> NewBidAsync([FromBody] BargainingModel bargainingModel)
         {
             try
             {
-                logger.LogInformation($"HTTP: /addBid");
+                logger.LogInformation($"HTTP: /newBid");
 
                 var bargainingEntity = await repository.GetBargainingEntityAsync(bargainingModel.UserId, bargainingModel.ProductId);
 
-                if(bargainingEntity == null)
-                {
+                if(bargainingEntity == null)        
                     await repository.AddBidAsync(bargainingModel.ToBargainingEntity());
-                }
                 else
                 {
                     bargainingEntity.Price = bargainingModel.Price;
@@ -42,7 +40,7 @@ namespace AuctionApp.Service.Bargaining.Controllers
             }
             catch (Exception ex)
             {
-                logger.LogInformation($"{typeof(BargainingController)}.AddBidAsync : {ex.Message}");
+                logger.LogInformation($"{typeof(BargainingController)}.NewBidAsync : {ex.Message}");
 
                 return Problem(ex.Message, statusCode: 500);
             }
@@ -65,6 +63,28 @@ namespace AuctionApp.Service.Bargaining.Controllers
             catch (Exception ex)
             {
                 logger.LogInformation($"{typeof(BargainingController)}.GetWinBidAsync : {ex.Message}");
+
+                return Problem(ex.Message, statusCode: 500);
+            }
+        }
+
+        [HttpDelete("deleteBid/{categoryId:int}")]
+        public async Task<ActionResult> DeleteBidAsync([FromRoute] int categoryId)
+        {
+            try
+            {
+                logger.LogInformation($"HTTP: /deleteBid/{categoryId}");
+
+                if (categoryId < 0)
+                    throw new Exception(ExceptionsBargnainingApi.IncorrectProductId);
+
+                await repository.DeleteBidAsync(categoryId);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                logger.LogInformation($"{typeof(BargainingController)}.DeleteBidAsync : {ex.Message}");
 
                 return Problem(ex.Message, statusCode: 500);
             }

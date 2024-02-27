@@ -3,19 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuctionApp", "AuctionApp\AuctionApp.csproj", "{11A7C9FF-68DD-4DE1-A0BD-3D15C95ACD2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuctionApp", "AuctionApp\AuctionApp.csproj", "{11A7C9FF-68DD-4DE1-A0BD-3D15C95ACD2E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{4092F443-818B-43D1-BE9B-E524BFEB1582}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuctionApp.Service.Core", "AuctionApp.Service.Core\AuctionApp.Service.Core.csproj", "{C7726EA5-09B4-4701-AAA0-E2E829B3290F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuctionApp.Service.Core", "AuctionApp.Service.Core\AuctionApp.Service.Core.csproj", "{C7726EA5-09B4-4701-AAA0-E2E829B3290F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{230A25A9-4DB6-49C4-9982-4249958B5755}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestApp", "TestApp\TestApp.csproj", "{230A25A9-4DB6-49C4-9982-4249958B5755}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuctionApp.Service.Auth", "AuctionApp.Service.Auth\AuctionApp.Service.Auth.csproj", "{31A034E4-34DB-4CFF-A3E8-C0C4569CCDF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuctionApp.Service.Auth", "AuctionApp.Service.Auth\AuctionApp.Service.Auth.csproj", "{31A034E4-34DB-4CFF-A3E8-C0C4569CCDF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuctionApp.Service.StorageProduct", "AuctionApp.Service.StorageProduct\AuctionApp.Service.StorageProduct.csproj", "{71F49FC7-C4F2-49C9-83F6-99589F8F27C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuctionApp.Service.StorageProduct", "AuctionApp.Service.StorageProduct\AuctionApp.Service.StorageProduct.csproj", "{71F49FC7-C4F2-49C9-83F6-99589F8F27C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuctionApp.Service.Bargaining", "AuctionApp.Service.Bargaining\AuctionApp.Service.Bargaining.csproj", "{AE086131-C982-43E3-9E99-ECCEE9369A55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuctionApp.Service.Bargaining", "AuctionApp.Service.Bargaining\AuctionApp.Service.Bargaining.csproj", "{AE086131-C982-43E3-9E99-ECCEE9369A55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuctionApp.Service.Infrastructur", "AuctionApp.Service.Infrastructur\AuctionApp.Service.Infrastructur.csproj", "{A192E775-33EC-4771-8BE5-B21FCBD79DBB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{AE086131-C982-43E3-9E99-ECCEE9369A55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE086131-C982-43E3-9E99-ECCEE9369A55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE086131-C982-43E3-9E99-ECCEE9369A55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A192E775-33EC-4771-8BE5-B21FCBD79DBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A192E775-33EC-4771-8BE5-B21FCBD79DBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A192E775-33EC-4771-8BE5-B21FCBD79DBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A192E775-33EC-4771-8BE5-B21FCBD79DBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,6 +62,7 @@ Global
 		{31A034E4-34DB-4CFF-A3E8-C0C4569CCDF9} = {4092F443-818B-43D1-BE9B-E524BFEB1582}
 		{71F49FC7-C4F2-49C9-83F6-99589F8F27C5} = {4092F443-818B-43D1-BE9B-E524BFEB1582}
 		{AE086131-C982-43E3-9E99-ECCEE9369A55} = {4092F443-818B-43D1-BE9B-E524BFEB1582}
+		{A192E775-33EC-4771-8BE5-B21FCBD79DBB} = {4092F443-818B-43D1-BE9B-E524BFEB1582}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9DF2A09F-5A0A-461B-AF1A-A791461A40DF}

@@ -12,5 +12,7 @@ namespace AuctionApp.Service.Core.Repositories
         public Task<BargainingEntity?> GetBargainingEntityAsync(int userId, int productId);
 
         public Task<BargainingEntity?> GetWinBidAsync(int productId);
+
+        public Task DeleteBidAsync(int id);
     }
 }

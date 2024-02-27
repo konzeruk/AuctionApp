@@ -1,5 +1,9 @@
-﻿using AuctionApp.Service.Core.Repositories;
+﻿using AuctionApp.Service.Core.Models.DTO;
+using AuctionApp.Service.Core.Repositories;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace AuctionApp.Service.Auth.Middleware
 {
@@ -20,11 +24,20 @@ namespace AuctionApp.Service.Auth.Middleware
         {
             try
             {
-                var login = context.Request.Query["login"];
+                // сделать красиво
+                using StreamReader reader = new StreamReader(context.Request.Body);
+                string json = await reader.ReadToEndAsync();
+
+                var authModel = JsonConvert.DeserializeObject<AuthModel>(json);
+
+                if (authModel == null)
+                    throw new Exception(ExpceptionAuthApi.IncorrectData);
+
+                var login = authModel.Login;
 
                 logger.LogInformation($"Authorization: {login}");
 
-                var password = context.Request.Query["password"];
+                var password = authModel.Password;
 
                 if (login == string.Empty || password == string.Empty)
                     throw new Exception(ExpceptionAuthApi.IncorrectData);
@@ -33,7 +46,7 @@ namespace AuctionApp.Service.Auth.Middleware
                     var userEntity = await authEntityRepository.GetUserAsync(login, password);
 
                     if (userEntity == null)
-                         throw new Exception(ExpceptionAuthApi.NotFoundUser);
+                        throw new Exception(ExpceptionAuthApi.NotFoundUser);
                     else
                     {
                         logger.LogInformation("User found");
@@ -44,7 +57,7 @@ namespace AuctionApp.Service.Auth.Middleware
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 logger.LogInformation($"{typeof(AuthorizationMiddleware)} : {ex.Message}");
 

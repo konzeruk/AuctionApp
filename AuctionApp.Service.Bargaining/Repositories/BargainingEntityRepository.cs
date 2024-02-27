@@ -39,6 +39,18 @@ namespace AuctionApp.Service.Bargaining.Repositories
             .OrderByDescending(x => x.Price)
             .FirstOrDefaultAsync();
 
+        public async Task DeleteBidAsync(int productId)
+        {
+            var listBid = context
+                .Bargaining
+                .Where (x => x.ProductId == productId)
+                .ToList();
+
+            foreach (var bid in listBid)
+                context.Bargaining.Remove(bid);
+
+            await context.SaveChangesAsync();
+        }
 
     }
 }
