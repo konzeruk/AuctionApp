@@ -11,6 +11,7 @@ namespace AuctionApp.Service.Infrastructur.Controllers
     {
         private ILogger logger;
         private IInfrastructurHttpClient httpClient;
+        private const string nameApi = "BargainingApi";
 
         public BidController(IInfrastructurHttpClient httpClient, ILogger logger)
         {
@@ -27,7 +28,12 @@ namespace AuctionApp.Service.Infrastructur.Controllers
 
                 var request = "newBid";
 
-                await httpClient.SendRequestBargainingApiAsync(request, bargainingModel, HttpMethod.Post);
+                await httpClient.SendRequestAsync(new RequestModel()
+                {
+                    NameApi = nameApi,
+                    Request = request,
+                    _HttpMethod = HttpMethod.Post
+                }, bargainingModel);
 
                 return Ok();
             }
@@ -48,7 +54,12 @@ namespace AuctionApp.Service.Infrastructur.Controllers
 
                 var request = $"getWinBid/{productId}";
 
-                var response = await httpClient.SendRequestBargainingApiAsync<BargainingModel>(request, HttpMethod.Get);
+                var response = await httpClient.SendRequestAsync<BargainingModel>(new RequestModel()
+                {
+                    NameApi = nameApi,
+                    Request = request,
+                    _HttpMethod = HttpMethod.Get
+                });
 
                 return Ok(value: response);
             }
@@ -69,7 +80,12 @@ namespace AuctionApp.Service.Infrastructur.Controllers
 
                 var request = $"deleteBid/{categoryId}";
 
-                await httpClient.SendRequestBargainingApiAsync(request, HttpMethod.Delete);
+                await httpClient.SendRequestAsync(new RequestModel()
+                {
+                    NameApi = nameApi,
+                    Request = request,
+                    _HttpMethod = HttpMethod.Delete
+                });
 
                 return Ok();
             }

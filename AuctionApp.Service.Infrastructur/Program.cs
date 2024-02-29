@@ -12,7 +12,7 @@ services.AddScoped<IInfrastructurHttpClient, InfrastructurHttpClient>();
 
 var app = builder.Build();
 
-builder.Configuration.AddJsonFile("appsettings.Development.json");
+builder.Configuration.AddJsonFile("appsettings.json");
 
 app.UseHttpsRedirection();
 

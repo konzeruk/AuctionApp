@@ -1,10 +1,11 @@
 ﻿using AuctionApp.Service.Core.HttpClients;
-using Azure.Core;
+using AuctionApp.Service.Core.Models.DTO;
 using System.Net;
 using System.Text.Json;
 
 namespace AuctionApp.Service.Infrastructur.HttpClients
 {
+    //переделать это говно
     public class InfrastructurHttpClient : IInfrastructurHttpClient
     {
         private HttpClient httpClient;
@@ -18,36 +19,15 @@ namespace AuctionApp.Service.Infrastructur.HttpClients
             this.logger = logger;
         }
 
-        public async Task<TResponse?> SendRequestAuthApiAsync<TResponse, TRequest>(string request, TRequest? param, HttpMethod httpMethod) =>
-            await SendRequestAsync<TResponse, TRequest>(request, param, "AuthApi", httpMethod);
-
-        public async Task SendRequestBargainingApiAsync<TRequest>(string request, TRequest? param, HttpMethod httpMethod) =>
-            await SendRequestAsync(request, param, "BargainingApi", httpMethod);
-
-        public async Task<TResponse?> SendRequestBargainingApiAsync<TResponse>(string request, HttpMethod httpMethod) =>
-            await SendRequestAsync<TResponse>(request, "BargainingApi", httpMethod);
-
-        public async Task SendRequestBargainingApiAsync(string request, HttpMethod httpMethod) =>
-            await SendRequestAsync(request, "BargainingApi", httpMethod);
-
-        public async Task SendRequestStorageProductApiAsync<TRequest>(string request, TRequest? param, HttpMethod httpMethod) =>
-            await SendRequestAsync(request, param, "StorageProductApi", httpMethod);
-
-        public async Task<TResponse?> SendRequestStorageProductApiAsync<TResponse>(string request, HttpMethod httpMethod) =>
-            await SendRequestAsync<TResponse>(request, "StorageProductApi", httpMethod);
-
-        public async Task SendRequestStorageProductApiAsync(string request, HttpMethod httpMethod) =>
-            await SendRequestAsync(request, "StorageProductApi", httpMethod);
-
-        private async Task<TResponse?> SendRequestAsync<TResponse, TRequest>(string request, TRequest? param, string api, HttpMethod httpMethod)
+        public async Task<TResponse?> SendRequestAsync<TResponse, TRequest>(RequestModel requestModel, TRequest param) 
         {
             try
             {
-                logger.LogInformation($"Request to {api}");
+                logger.LogInformation($"Request to {requestModel.NameApi}");
 
                 var content = CreateJsonContent(param);
 
-                var response = await _SendRequestAsync(servicesConfiguration[$"URL:{api}"], httpMethod, request, content);
+                var response = await SendRequestAsync(servicesConfiguration[$"URL:{requestModel.NameApi}"], requestModel._HttpMethod, requestModel.Request, content);
 
                 var contentResponse = await response.Content.ReadAsStringAsync();
 
@@ -58,23 +38,45 @@ namespace AuctionApp.Service.Infrastructur.HttpClients
             }
             catch (Exception)
             {
-                logger.LogInformation($"{typeof(InfrastructurHttpClient)}.{api}.SendRequestAsync");
+                logger.LogInformation($"{typeof(InfrastructurHttpClient)}.{requestModel.NameApi}.SendRequestAsync");
                 throw;
             }
         }
 
-        private async Task SendRequestAsync<TRequest>(string request, TRequest? param, string api, HttpMethod httpMethod)
+        public async Task<TResponse?> SendRequestAsync<TResponse>(RequestModel requestModel)
         {
             try
             {
-                logger.LogInformation($"Request to {api}");
+                logger.LogInformation($"Request to {requestModel.NameApi}");
+
+                var response = await SendRequestAsync(servicesConfiguration[$"URL:{requestModel.NameApi}"], requestModel._HttpMethod, requestModel.Request, null);
+
+                var contentResponse = await response.Content.ReadAsStringAsync();
+
+                if (response.StatusCode != HttpStatusCode.OK)
+                    throw new Exception(contentResponse);
+
+                return JsonSerializer.Deserialize<TResponse>(contentResponse);
+            }
+            catch (Exception)
+            {
+                logger.LogInformation($"{typeof(InfrastructurHttpClient)}.{requestModel.NameApi}.SendRequestAsync");
+                throw;
+            }
+        }
+
+        public async Task SendRequestAsync<TRequest>(RequestModel requestModel, TRequest param)
+        {
+            try
+            {
+                logger.LogInformation($"Request to {requestModel.NameApi}");
 
                 if (param == null)
                     throw new Exception(ExceptionInfrastructurApi.ErrorRequestAuthApi);
 
                 var content = CreateJsonContent(param);
 
-                var response = await _SendRequestAsync(servicesConfiguration[$"URL:{api}"], httpMethod, request, content);
+                var response = await SendRequestAsync(servicesConfiguration[$"URL:{requestModel.NameApi}"], requestModel._HttpMethod, requestModel.Request, content);
 
                 var contentResponse = await response.Content.ReadAsStringAsync();
 
@@ -83,18 +85,18 @@ namespace AuctionApp.Service.Infrastructur.HttpClients
             }
             catch (Exception)
             {
-                logger.LogInformation($"{typeof(InfrastructurHttpClient)}.{api}.SendRequestAsync");
+                logger.LogInformation($"{typeof(InfrastructurHttpClient)}.{requestModel.NameApi}.SendRequestAsync");
                 throw;
             }
         }
 
-        private async Task SendRequestAsync(string request, string api, HttpMethod httpMethod)
+        public async Task SendRequestAsync(RequestModel requestModel)
         {
             try
             {
-                logger.LogInformation($"Request to {api}");
+                logger.LogInformation($"Request to {requestModel.NameApi}");
 
-                var response = await _SendRequestAsync(servicesConfiguration[$"URL:{api}"], httpMethod, request, null);
+                var response = await SendRequestAsync(servicesConfiguration[$"URL:{requestModel.NameApi}"], requestModel._HttpMethod, requestModel.Request, null);
 
                 var contentResponse = await response.Content.ReadAsStringAsync();
 
@@ -103,34 +105,12 @@ namespace AuctionApp.Service.Infrastructur.HttpClients
             }
             catch (Exception)
             {
-                logger.LogInformation($"{typeof(InfrastructurHttpClient)}.{api}.SendRequestAsync");
+                logger.LogInformation($"{typeof(InfrastructurHttpClient)}.{requestModel.NameApi}.SendRequestAsync");
                 throw;
             }
         }
 
-        private async Task<TResponse?> SendRequestAsync<TResponse>(string request, string api, HttpMethod httpMethod)
-        {
-            try
-            {
-                logger.LogInformation($"Request to {api}");
-
-                var response = await _SendRequestAsync(servicesConfiguration[$"URL:{api}"], httpMethod, request, null);
-
-                var contentResponse = await response.Content.ReadAsStringAsync();
-
-                if (response.StatusCode != HttpStatusCode.OK)
-                    throw new Exception(contentResponse);
-
-                return JsonSerializer.Deserialize<TResponse>(contentResponse);
-            }
-            catch (Exception)
-            {
-                logger.LogInformation($"{typeof(InfrastructurHttpClient)}.{api}.SendRequestAsync");
-                throw;
-            }
-        }
-
-        private async Task<HttpResponseMessage> _SendRequestAsync(string baseAddress, HttpMethod httpMethod, string request, JsonContent? content)
+        private async Task<HttpResponseMessage> SendRequestAsync(string baseAddress, HttpMethod httpMethod, string request, JsonContent? content)
         {
             try
             {

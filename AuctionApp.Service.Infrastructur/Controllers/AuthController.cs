@@ -10,7 +10,7 @@ namespace AuctionApp.Service.Infrastructur.Controllers
     {
         private ILogger logger;
         private IInfrastructurHttpClient httpClient;
-        
+        private const string nameApi = "AuthApi";
         public AuthController(IInfrastructurHttpClient httpClient, ILogger logger)
         {
             this.httpClient = httpClient;
@@ -25,9 +25,12 @@ namespace AuctionApp.Service.Infrastructur.Controllers
 
                 logger.LogInformation($"HTTP: api/{typeof(AuthController)}");
 
-                var request = string.Empty;
-
-                var response = await httpClient.SendRequestAuthApiAsync<string, AuthModel>(request, authModel, HttpMethod.Get);
+                var response = await httpClient.SendRequestAsync<string>(new RequestModel()
+                {
+                    NameApi = nameApi,
+                    Request = string.Empty,
+                    _HttpMethod = HttpMethod.Get
+                });
 
                 return Ok(value: response);
             }

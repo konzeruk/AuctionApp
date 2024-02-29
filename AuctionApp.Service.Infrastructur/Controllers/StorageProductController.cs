@@ -1,7 +1,6 @@
 ﻿using AuctionApp.Service.Core.HttpClients;
 using AuctionApp.Service.Core.Models.DTO;
 using AuctionApp.Service.Core.Models.DTO.Responses;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuctionApp.Service.Infrastructur.Controllers
@@ -13,6 +12,7 @@ namespace AuctionApp.Service.Infrastructur.Controllers
     {
         private ILogger logger;
         private IInfrastructurHttpClient httpClient;
+        private const string nameApi = "StorageProductApi";
 
         public StorageProductController(IInfrastructurHttpClient httpClient, ILogger logger)
         {
@@ -29,7 +29,12 @@ namespace AuctionApp.Service.Infrastructur.Controllers
 
                 var request = "addProduct";
 
-                await httpClient.SendRequestStorageProductApiAsync(request, productModel, HttpMethod.Post);
+                await httpClient.SendRequestAsync(new RequestModel()
+                {
+                    NameApi = nameApi,
+                    Request = request,
+                    _HttpMethod = HttpMethod.Post,
+                });
 
                 return Ok();
             }
@@ -50,7 +55,12 @@ namespace AuctionApp.Service.Infrastructur.Controllers
 
                 var request = $"updataPriceProduct/{id}/{price}";
 
-                await httpClient.SendRequestStorageProductApiAsync(request, HttpMethod.Post);
+                await httpClient.SendRequestAsync(new RequestModel()
+                {
+                    NameApi = nameApi,
+                    Request = request,
+                    _HttpMethod = HttpMethod.Post,
+                });
 
                 return Ok();
             }
@@ -71,7 +81,12 @@ namespace AuctionApp.Service.Infrastructur.Controllers
 
                 var request = $"deleteProduct/{id}";
 
-                await httpClient.SendRequestStorageProductApiAsync(request, HttpMethod.Delete);
+                await httpClient.SendRequestAsync(new RequestModel()
+                {
+                    NameApi = nameApi,
+                    Request = request,
+                    _HttpMethod = HttpMethod.Delete
+                });
 
                 return Ok();
             }
@@ -92,7 +107,12 @@ namespace AuctionApp.Service.Infrastructur.Controllers
 
                 var request = $"getAllProduct/{categoryId}";
 
-                var response = await httpClient.SendRequestStorageProductApiAsync<List<ProductModelResponse>>(request, HttpMethod.Get);
+                var response = await httpClient.SendRequestAsync<List<ProductModelResponse>>(new RequestModel()
+                {
+                    NameApi = nameApi,
+                    Request = request,
+                    _HttpMethod = HttpMethod.Get
+                });
 
                 return Ok(value: response);
             }
@@ -113,7 +133,12 @@ namespace AuctionApp.Service.Infrastructur.Controllers
 
                 var request = "getAllCategory";
 
-                var response = await httpClient.SendRequestStorageProductApiAsync<List<CategoryModel>>(request, HttpMethod.Get);
+                var response = await httpClient.SendRequestAsync<List<CategoryModel>>(new RequestModel()
+                {
+                    NameApi = nameApi,
+                    Request = request,
+                    _HttpMethod = HttpMethod.Get
+                });
 
                 return Ok(value: response);
             }

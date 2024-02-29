@@ -24,9 +24,11 @@ namespace AuctionApp.Service.Auth.Middleware
         {
             try
             {
-                // сделать красиво
                 using StreamReader reader = new StreamReader(context.Request.Body);
                 string json = await reader.ReadToEndAsync();
+
+                if (json == null)
+                    throw new Exception(ExpceptionAuthApi.EmptyData);
 
                 var authModel = JsonConvert.DeserializeObject<AuthModel>(json);
 
