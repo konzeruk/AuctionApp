@@ -27,9 +27,6 @@ namespace AuctionApp.Service.Auth.Middleware
                 using StreamReader reader = new StreamReader(context.Request.Body);
                 string json = await reader.ReadToEndAsync();
 
-                if (json == null)
-                    throw new Exception(ExpceptionAuthApi.EmptyData);
-
                 var authModel = JsonConvert.DeserializeObject<AuthModel>(json);
 
                 if (authModel == null)
@@ -55,7 +52,7 @@ namespace AuctionApp.Service.Auth.Middleware
 
                         context.Response.StatusCode = 200;
                         await context.Response.WriteAsync(userEntity.Id.ToString());
-                        await next.Invoke(context);
+                        //await next.Invoke(context);
                     }
                 }
             }

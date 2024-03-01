@@ -8,7 +8,7 @@ var services = builder.Services;
 services.AddControllers();
 
 services.AddScoped<ILogger>(s => s.GetService<ILogger<Program>>()!);
-services.AddScoped<IInfrastructurHttpClient, InfrastructurHttpClient>();
+services.AddScoped<IHttpClient, AuctionAppHttpClient>();
 
 var app = builder.Build();
 

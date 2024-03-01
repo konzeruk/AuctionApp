@@ -2,6 +2,7 @@
 using AuctionApp.Service.Core.Models.DTO;
 using AuctionApp.Service.Core.Models.DTO.Responses;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace AuctionApp.Service.Infrastructur.Controllers
 {
@@ -11,15 +12,17 @@ namespace AuctionApp.Service.Infrastructur.Controllers
     public class StorageProductController : ControllerBase
     {
         private ILogger logger;
-        private IInfrastructurHttpClient httpClient;
+        private IHttpClient httpClient;
+        private IConfiguration servicesConfiguration;
         private const string nameApi = "StorageProductApi";
 
-        public StorageProductController(IInfrastructurHttpClient httpClient, ILogger logger)
+        public StorageProductController(IHttpClient httpClient, ILogger logger, IConfiguration servicesConfiguration)
         {
             this.httpClient = httpClient;
             this.logger = logger;
+            this.servicesConfiguration = servicesConfiguration;
         }
-
+   
         [HttpPost("addProduct")]
         public async Task<ActionResult> AddProductAsync([FromBody] ProductModel productModel)
         {
@@ -29,9 +32,9 @@ namespace AuctionApp.Service.Infrastructur.Controllers
 
                 var request = "addProduct";
 
-                await httpClient.SendRequestAsync(new RequestModel()
+                await httpClient._SendRequestAsync(new RequestModel()
                 {
-                    NameApi = nameApi,
+                    BaseAddress = servicesConfiguration[$"URL:{nameApi}"],
                     Request = request,
                     _HttpMethod = HttpMethod.Post,
                 });
@@ -55,9 +58,9 @@ namespace AuctionApp.Service.Infrastructur.Controllers
 
                 var request = $"updataPriceProduct/{id}/{price}";
 
-                await httpClient.SendRequestAsync(new RequestModel()
+                await httpClient._SendRequestAsync(new RequestModel()
                 {
-                    NameApi = nameApi,
+                    BaseAddress = servicesConfiguration[$"URL:{nameApi}"],
                     Request = request,
                     _HttpMethod = HttpMethod.Post,
                 });
@@ -81,9 +84,9 @@ namespace AuctionApp.Service.Infrastructur.Controllers
 
                 var request = $"deleteProduct/{id}";
 
-                await httpClient.SendRequestAsync(new RequestModel()
+                await httpClient._SendRequestAsync(new RequestModel()
                 {
-                    NameApi = nameApi,
+                    BaseAddress = servicesConfiguration[$"URL:{nameApi}"],
                     Request = request,
                     _HttpMethod = HttpMethod.Delete
                 });
@@ -107,9 +110,9 @@ namespace AuctionApp.Service.Infrastructur.Controllers
 
                 var request = $"getAllProduct/{categoryId}";
 
-                var response = await httpClient.SendRequestAsync<List<ProductModelResponse>>(new RequestModel()
+                var response = await httpClient.SendRequestAsync(new RequestModel()
                 {
-                    NameApi = nameApi,
+                    BaseAddress = servicesConfiguration[$"URL:{nameApi}"],
                     Request = request,
                     _HttpMethod = HttpMethod.Get
                 });
@@ -133,9 +136,9 @@ namespace AuctionApp.Service.Infrastructur.Controllers
 
                 var request = "getAllCategory";
 
-                var response = await httpClient.SendRequestAsync<List<CategoryModel>>(new RequestModel()
+                var response = await httpClient.SendRequestAsync(new RequestModel()
                 {
-                    NameApi = nameApi,
+                    BaseAddress = servicesConfiguration[$"URL:{nameApi}"],
                     Request = request,
                     _HttpMethod = HttpMethod.Get
                 });

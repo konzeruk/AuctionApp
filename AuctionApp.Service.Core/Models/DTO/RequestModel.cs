@@ -2,8 +2,9 @@
 {
     public class RequestModel
     {
+        public string BaseAddress { get; set; }
         public string Request {  get; set; }
-        public string NameApi { get; set; }
         public HttpMethod _HttpMethod {  get; set; }
+
     }
 }

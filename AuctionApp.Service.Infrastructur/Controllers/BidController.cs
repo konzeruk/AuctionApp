@@ -10,13 +10,15 @@ namespace AuctionApp.Service.Infrastructur.Controllers
     public class BidController : ControllerBase
     {
         private ILogger logger;
-        private IInfrastructurHttpClient httpClient;
+        private IHttpClient httpClient;
+        private IConfiguration servicesConfiguration;
         private const string nameApi = "BargainingApi";
 
-        public BidController(IInfrastructurHttpClient httpClient, ILogger logger)
+        public BidController(IHttpClient httpClient, ILogger logger, IConfiguration servicesConfiguration)
         {
             this.httpClient = httpClient;
             this.logger = logger;
+            this.servicesConfiguration = servicesConfiguration;
         }
 
         [HttpPost("newBid")]
@@ -28,9 +30,9 @@ namespace AuctionApp.Service.Infrastructur.Controllers
 
                 var request = "newBid";
 
-                await httpClient.SendRequestAsync(new RequestModel()
+                await httpClient._SendRequestAsync(new RequestModel()
                 {
-                    NameApi = nameApi,
+                    BaseAddress = servicesConfiguration[$"URL:{nameApi}"],
                     Request = request,
                     _HttpMethod = HttpMethod.Post
                 }, bargainingModel);
@@ -54,9 +56,9 @@ namespace AuctionApp.Service.Infrastructur.Controllers
 
                 var request = $"getWinBid/{productId}";
 
-                var response = await httpClient.SendRequestAsync<BargainingModel>(new RequestModel()
+                var response = await httpClient.SendRequestAsync(new RequestModel()
                 {
-                    NameApi = nameApi,
+                    BaseAddress = servicesConfiguration[$"URL:{nameApi}"],
                     Request = request,
                     _HttpMethod = HttpMethod.Get
                 });
@@ -80,9 +82,9 @@ namespace AuctionApp.Service.Infrastructur.Controllers
 
                 var request = $"deleteBid/{categoryId}";
 
-                await httpClient.SendRequestAsync(new RequestModel()
+                await httpClient._SendRequestAsync(new RequestModel()
                 {
-                    NameApi = nameApi,
+                    BaseAddress = servicesConfiguration[$"URL:{nameApi}"],
                     Request = request,
                     _HttpMethod = HttpMethod.Delete
                 });

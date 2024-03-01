@@ -9,12 +9,14 @@ namespace AuctionApp.Service.Infrastructur.Controllers
     public class AuthController : ControllerBase
     {
         private ILogger logger;
-        private IInfrastructurHttpClient httpClient;
+        private IHttpClient httpClient;
+        private IConfiguration servicesConfiguration;
         private const string nameApi = "AuthApi";
-        public AuthController(IInfrastructurHttpClient httpClient, ILogger logger)
+        public AuthController(IHttpClient httpClient, ILogger logger, IConfiguration servicesConfiguration)
         {
             this.httpClient = httpClient;
             this.logger = logger;
+            this.servicesConfiguration = servicesConfiguration;
         }
 
         [HttpGet]
@@ -22,15 +24,14 @@ namespace AuctionApp.Service.Infrastructur.Controllers
         {
             try
             {
-
                 logger.LogInformation($"HTTP: api/{typeof(AuthController)}");
 
-                var response = await httpClient.SendRequestAsync<string>(new RequestModel()
+                var response = await httpClient.SendRequestAsync(new RequestModel()
                 {
-                    NameApi = nameApi,
+                    BaseAddress = servicesConfiguration[$"URL:{nameApi}"],
                     Request = string.Empty,
                     _HttpMethod = HttpMethod.Get
-                });
+                }, authModel);
 
                 return Ok(value: response);
             }

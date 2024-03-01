@@ -86,27 +86,28 @@
             // labelError
             // 
             labelError.AutoSize = true;
-            labelError.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            labelError.Location = new Point(12, 290);
+            labelError.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            labelError.Location = new Point(12, 255);
             labelError.Name = "labelError";
-            labelError.Size = new Size(0, 25);
+            labelError.Size = new Size(0, 17);
             labelError.TabIndex = 5;
             // 
             // bEntry
             // 
             bEntry.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            bEntry.Location = new Point(50, 333);
+            bEntry.Location = new Point(50, 285);
             bEntry.Name = "bEntry";
             bEntry.Size = new Size(212, 43);
             bEntry.TabIndex = 6;
             bEntry.Text = "Вход";
             bEntry.UseVisualStyleBackColor = true;
+            bEntry.Click += bEntry_Click;
             // 
             // AuthForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(321, 388);
+            ClientSize = new Size(321, 338);
             Controls.Add(bEntry);
             Controls.Add(labelError);
             Controls.Add(textBoxPassword);
