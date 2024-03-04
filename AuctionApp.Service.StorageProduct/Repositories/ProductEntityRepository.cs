@@ -49,10 +49,10 @@ namespace AuctionApp.Service.StorageProduct.Repositories
             .Category
             .ToListAsync();
 
-        public async Task<CategoryEntity?> GetCategoryIdByNameAsync(string name) =>
+        public async Task<CategoryEntity?> GetCategoryByIdAsync(int id) =>
             await context
             .Category
-            .Where(x => x.Name == name)
+            .Where(x => x.Id == id)
             .FirstOrDefaultAsync();
     }
 }

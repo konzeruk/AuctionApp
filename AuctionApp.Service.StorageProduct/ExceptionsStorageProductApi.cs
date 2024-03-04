@@ -8,7 +8,7 @@
 
         public const string NotFoundProduct = "Продукт не найден";
 
-        public const string NotFoundCategoryByName = "Категории с данным именем нет";
+        public const string NotFoundCategoryById = "Категории с данным id нет";
 
         public const string NotCategory = "Категорий нет";
     }

@@ -1,7 +1,6 @@
 ﻿using AuctionApp.Service.Core.Extensions;
 using AuctionApp.Service.Core.Models.DTO;
 using AuctionApp.Service.Core.Repositories;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuctionApp.Service.Bargaining.Controllers

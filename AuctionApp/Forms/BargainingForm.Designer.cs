@@ -28,26 +28,53 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dataGridViewProduct = new DataGridView();
-            bBack = new Button();
+            dataGridViewProducts = new DataGridView();
             ColumnName = new DataGridViewTextBoxColumn();
-            ColumnPhoto = new DataGridViewImageColumn();
             ColumnPrice = new DataGridViewTextBoxColumn();
-            ColumnDataEnd = new DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewProduct).BeginInit();
+            ColumnDateEnd = new DataGridViewTextBoxColumn();
+            bUpdataPrice = new DataGridViewButtonColumn();
+            bBack = new Button();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewProducts).BeginInit();
             SuspendLayout();
             // 
-            // dataGridViewProduct
+            // dataGridViewProducts
             // 
-            dataGridViewProduct.AllowUserToAddRows = false;
-            dataGridViewProduct.AllowUserToDeleteRows = false;
-            dataGridViewProduct.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewProduct.Columns.AddRange(new DataGridViewColumn[] { ColumnName, ColumnPhoto, ColumnPrice, ColumnDataEnd });
-            dataGridViewProduct.Location = new Point(12, 12);
-            dataGridViewProduct.Name = "dataGridViewProduct";
-            dataGridViewProduct.RowTemplate.Height = 25;
-            dataGridViewProduct.Size = new Size(684, 404);
-            dataGridViewProduct.TabIndex = 0;
+            dataGridViewProducts.AllowUserToAddRows = false;
+            dataGridViewProducts.AllowUserToDeleteRows = false;
+            dataGridViewProducts.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewProducts.Columns.AddRange(new DataGridViewColumn[] { ColumnName, ColumnPrice, ColumnDateEnd, bUpdataPrice });
+            dataGridViewProducts.Location = new Point(12, 12);
+            dataGridViewProducts.Name = "dataGridViewProducts";
+            dataGridViewProducts.RowTemplate.Height = 25;
+            dataGridViewProducts.Size = new Size(684, 404);
+            dataGridViewProducts.TabIndex = 0;
+            dataGridViewProducts.CellContentClick += dataGridViewProducts_CellContentClick;
+            // 
+            // ColumnName
+            // 
+            ColumnName.HeaderText = "Название";
+            ColumnName.Name = "ColumnName";
+            ColumnName.ReadOnly = true;
+            // 
+            // ColumnPrice
+            // 
+            ColumnPrice.HeaderText = "Цена";
+            ColumnPrice.Name = "ColumnPrice";
+            ColumnPrice.ReadOnly = true;
+            // 
+            // ColumnDateEnd
+            // 
+            ColumnDateEnd.HeaderText = "Дата окончания";
+            ColumnDateEnd.Name = "ColumnDateEnd";
+            ColumnDateEnd.ReadOnly = true;
+            // 
+            // bUpdataPrice
+            // 
+            bUpdataPrice.HeaderText = "";
+            bUpdataPrice.Name = "bUpdataPrice";
+            bUpdataPrice.Text = "Ставка";
+            bUpdataPrice.UseColumnTextForButtonValue = true;
             // 
             // bBack
             // 
@@ -58,46 +85,30 @@
             bBack.TabIndex = 1;
             bBack.Text = "Назад";
             bBack.UseVisualStyleBackColor = true;
-            // 
-            // ColumnName
-            // 
-            ColumnName.HeaderText = "Название";
-            ColumnName.Name = "ColumnName";
-            // 
-            // ColumnPhoto
-            // 
-            ColumnPhoto.HeaderText = "Фото";
-            ColumnPhoto.Name = "ColumnPhoto";
-            // 
-            // ColumnPrice
-            // 
-            ColumnPrice.HeaderText = "Цена";
-            ColumnPrice.Name = "ColumnPrice";
-            // 
-            // ColumnDataEnd
-            // 
-            ColumnDataEnd.HeaderText = "Дата окончания";
-            ColumnDataEnd.Name = "ColumnDataEnd";
+            bBack.Click += bBack_Click;
             // 
             // BargainingForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(707, 480);
+            ControlBox = false;
             Controls.Add(bBack);
-            Controls.Add(dataGridViewProduct);
+            Controls.Add(dataGridViewProducts);
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "BargainingForm";
-            ((System.ComponentModel.ISupportInitialize)dataGridViewProduct).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewProducts).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private DataGridView dataGridViewProduct;
+        private DataGridView dataGridViewProducts;
         private Button bBack;
         private DataGridViewTextBoxColumn ColumnName;
-        private DataGridViewImageColumn ColumnPhoto;
         private DataGridViewTextBoxColumn ColumnPrice;
-        private DataGridViewTextBoxColumn ColumnDataEnd;
+        private DataGridViewTextBoxColumn ColumnDateEnd;
+        private DataGridViewButtonColumn bUpdataPrice;
     }
 }

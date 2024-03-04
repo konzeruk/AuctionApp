@@ -95,7 +95,7 @@
             // bEntry
             // 
             bEntry.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            bEntry.Location = new Point(50, 285);
+            bEntry.Location = new Point(50, 313);
             bEntry.Name = "bEntry";
             bEntry.Size = new Size(212, 43);
             bEntry.TabIndex = 6;
@@ -107,7 +107,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(321, 338);
+            ClientSize = new Size(321, 368);
             Controls.Add(bEntry);
             Controls.Add(labelError);
             Controls.Add(textBoxPassword);
@@ -116,6 +116,7 @@
             Controls.Add(labelLogin);
             Controls.Add(labelAuth);
             MaximizeBox = false;
+            MdiChildrenMinimizedAnchorBottom = false;
             MinimizeBox = false;
             Name = "AuthForm";
             ResumeLayout(false);

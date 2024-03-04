@@ -1,5 +1,6 @@
 ﻿using AuctionApp.Service.Core.Models.DTO;
 using Azure;
+using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Text.Json;
 
@@ -57,7 +58,7 @@ namespace AuctionApp.Services
 
                     return new ResultModel<BargainingModel>()
                     {
-                        Value = JsonSerializer.Deserialize<BargainingModel>(response),
+                        Value = JsonConvert.DeserializeObject<BargainingModel>(response),
                         Status = StatusResult.OK
                     };
                 }

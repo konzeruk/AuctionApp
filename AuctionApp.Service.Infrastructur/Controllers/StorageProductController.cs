@@ -1,8 +1,6 @@
 ﻿using AuctionApp.Service.Core.HttpClients;
 using AuctionApp.Service.Core.Models.DTO;
-using AuctionApp.Service.Core.Models.DTO.Responses;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 
 namespace AuctionApp.Service.Infrastructur.Controllers
 {
@@ -23,21 +21,21 @@ namespace AuctionApp.Service.Infrastructur.Controllers
             this.servicesConfiguration = servicesConfiguration;
         }
    
-        [HttpPost("addProduct")]
-        public async Task<ActionResult> AddProductAsync([FromBody] ProductModel productModel)
+        [HttpPost("addProduct/{categoryId:int}")]
+        public async Task<ActionResult> AddProductAsync([FromRoute] int categoryId, [FromBody] ProductModel productModel)
         {
             try
             {
                 logger.LogInformation($"HTTP: api/StorageProduct/addProduct");
 
-                var request = "addProduct";
+                var request = $"addProduct/{categoryId}";
 
                 await httpClient._SendRequestAsync(new RequestModel()
                 {
                     BaseAddress = servicesConfiguration[$"URL:{nameApi}"],
                     Request = request,
                     _HttpMethod = HttpMethod.Post,
-                });
+                }, productModel);
 
                 return Ok();
             }

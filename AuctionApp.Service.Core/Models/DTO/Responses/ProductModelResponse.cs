@@ -14,10 +14,7 @@ namespace AuctionApp.Service.Core.Models.DTO.Responses
         [JsonProperty("price")]
         public double Price { get; set; }
 
-        [JsonProperty("date_end")]
+        [JsonProperty("dateEnd")]
         public DateTime DateEnd { get; set; }
-
-        [JsonProperty("name_category")]
-        public string NameCategory { get; set; }
     }
 }

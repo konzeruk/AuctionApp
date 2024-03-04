@@ -4,10 +4,10 @@ namespace AuctionApp.Service.Core.Models.DTO
 {
     public class BargainingModel
     {
-        [JsonProperty("user_id")]
+        [JsonProperty("userId")]
         public int UserId { get; set; }
 
-        [JsonProperty("product_id")]
+        [JsonProperty("productId")]
         public int ProductId { get; set; }
 
         [JsonProperty("price")]

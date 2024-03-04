@@ -13,7 +13,6 @@ namespace AuctionApp.Service.Core.Extensions
                 Name = productEntity.Name,
                 Price = productEntity.Price,
                 DateEnd = productEntity.DateEnd,
-                NameCategory = productEntity.Category.Name
             };
 
         public static CategoryModel ToCategoryModel(this CategoryEntity categoryEntity) =>

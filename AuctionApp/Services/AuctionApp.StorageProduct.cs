@@ -1,6 +1,7 @@
 ﻿using AuctionApp.Service.Core.Models.DTO;
 using AuctionApp.Service.Core.Models.DTO.Responses;
-using Azure;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System.Diagnostics;
 using System.Text.Json;
 
@@ -12,18 +13,18 @@ namespace AuctionApp.Services
         {
             private const string addressController = "api/StorageProduct";
 
-            public static async Task<ResultModel<ProductModel>> AddProductAsync(ProductModel productModel)
+            public static async Task<ResultModel<ProductModel>> AddProductAsync(int categoryId, ProductModel productModel)
             {
                 try
                 {
-                    var request = "addProduct";
+                    var request = $"addProduct/{categoryId}";
 
                     await httpClient._SendRequestAsync(new RequestModel()
                     {
                         BaseAddress = $"{baseAddress}/{addressController}",
                         Request = request,
                         _HttpMethod = HttpMethod.Post
-                    });
+                    }, productModel);
 
                     return new ResultModel<ProductModel>()
                     {
@@ -120,7 +121,7 @@ namespace AuctionApp.Services
 
                     return new ResultModel<List<ProductModelResponse>>()
                     {
-                        Value = JsonSerializer.Deserialize<List<ProductModelResponse>>(response),
+                        Value = JsonConvert.DeserializeObject<List<ProductModelResponse>>(response, new IsoDateTimeConverter { DateTimeFormat = "yyyy-MM-dd HH:mm:ss" }),
                         Status = StatusResult.OK
                     };
                 }
@@ -151,7 +152,7 @@ namespace AuctionApp.Services
 
                     return new ResultModel<List<CategoryModel>>()
                     {
-                        Value = JsonSerializer.Deserialize<List<CategoryModel>>(response),
+                        Value = JsonConvert.DeserializeObject<List<CategoryModel>>(response),
                         Status = StatusResult.OK
                     };
                 }

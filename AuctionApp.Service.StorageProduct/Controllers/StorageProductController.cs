@@ -20,17 +20,17 @@ namespace AuctionApp.Service.StorageProduct.Controllers
             this.repository = repository;
         }
 
-        [HttpPost("addProduct")]
-        public async Task<ActionResult> AddProductAsync([FromBody] ProductModel productModel)
+        [HttpPost("addProduct/{categoryId:int}")]
+        public async Task<ActionResult> AddProductAsync([FromRoute] int categoryId, [FromBody] ProductModel productModel)
         {
             try
             {
-                logger.LogInformation($"HTTP: /addProduct");
+                logger.LogInformation($"HTTP: /addProduct/{categoryId}");
 
-                var categoryEntity = await repository.GetCategoryIdByNameAsync(productModel.NameCategory);
+                var categoryEntity = await repository.GetCategoryByIdAsync(categoryId);
 
                 if (categoryEntity == null)
-                    throw new Exception(ExceptionsStorageProductApi.NotFoundCategoryByName);
+                    throw new Exception(ExceptionsStorageProductApi.NotFoundCategoryById);
 
                 var productEntity = new ProductEntity()
                 {

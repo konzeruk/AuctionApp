@@ -1,8 +1,11 @@
+using AuctionApp.Forms;
 using AuctionApp.Service.Core.Models.DTO;
 namespace AuctionApp
 {
     public partial class AuthForm : Form
     {
+        public string? userId = null;
+
         public AuthForm()
         {
             InitializeComponent();
@@ -34,7 +37,9 @@ namespace AuctionApp
                 return;
             }
 
-            var userId = result.Value;
+            userId = result.Value;
+
+            Close();
         }
 
         private bool CheckNotEmptyTextBox() =>

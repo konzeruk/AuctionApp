@@ -10,10 +10,22 @@ namespace AuctionApp.Service.Core.Models.DTO
         [JsonProperty("price")]
         public double Price { get; set; }
 
-        [JsonProperty("date_end")]
+        [JsonProperty("dateEnd")]
         public DateTime DateEnd { get; set; }
 
-        [JsonProperty("name_category")]
-        public string NameCategory { get; set; }
+        public override bool Equals(object? obj)
+        {
+            if(obj == null) 
+                return false;
+            
+            var item = obj as ProductModel;
+
+            if(Name != item.Name || Price != item.Price || DateEnd != item.DateEnd)
+                return false;
+
+            return true;
+        }
+        public override int GetHashCode() => 
+            HashCode.Combine(Name, Price, DateEnd);
     }
 }

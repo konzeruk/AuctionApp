@@ -1,3 +1,5 @@
+using AuctionApp.Forms;
+
 namespace AuctionApp
 {
     internal static class Program
@@ -9,7 +11,7 @@ namespace AuctionApp
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            Application.Run(new AuthForm());
+            Application.Run(new MainForm());
         }
     }
 }
