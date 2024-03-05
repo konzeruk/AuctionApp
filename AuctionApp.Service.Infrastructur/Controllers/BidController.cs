@@ -1,6 +1,5 @@
 ﻿using AuctionApp.Service.Core.HttpClients;
 using AuctionApp.Service.Core.Models.DTO;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuctionApp.Service.Infrastructur.Controllers

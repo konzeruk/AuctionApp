@@ -8,6 +8,7 @@ namespace AuctionApp.Services
 {
     internal static partial class AuctionApp
     {
+        // класс для отправки запросов в сервис хранения продуктов
         public static class StorageProduct
         {
             private const string addressController = "api/StorageProduct";

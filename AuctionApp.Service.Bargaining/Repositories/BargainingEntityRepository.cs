@@ -1,9 +1,7 @@
 ﻿using AuctionApp.Service.Core.ContextDB;
-using AuctionApp.Service.Core.Models.DTO;
 using AuctionApp.Service.Core.Models.Entities;
 using AuctionApp.Service.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace AuctionApp.Service.Bargaining.Repositories
 {

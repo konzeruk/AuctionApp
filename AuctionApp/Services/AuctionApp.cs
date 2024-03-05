@@ -7,6 +7,7 @@ namespace AuctionApp.Services
     {
         private static IHttpClient httpClient = new AuctionAppHttpClient();
 
+        // адрес главного сервиса, через который происходит координация
         private const string baseAddress = "https://localhost:7070";
     }
 }

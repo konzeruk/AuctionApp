@@ -1,5 +1,6 @@
 ﻿namespace AuctionApp.Service.StorageProduct
 {
+    // класс с исключениями сервиса
     public static class ExceptionsStorageProductApi
     {
         public const string IncorrectId = "Id не корректен";

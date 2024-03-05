@@ -1,13 +1,11 @@
 ﻿using AuctionApp.Service.Core.Models.DTO;
-using AuctionApp.Service.Core.Models.DTO.Responses;
-using Microsoft.VisualBasic.ApplicationServices;
-using Newtonsoft.Json;
 using System.Diagnostics;
 
 namespace AuctionApp.Services
 {
     internal static partial class AuctionApp
     {
+        // класс для отправки запросов в сервис авторизации
         internal static class AuthService
         {
             private const string addressController = "api/Auth";

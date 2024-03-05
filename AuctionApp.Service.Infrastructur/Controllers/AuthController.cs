@@ -35,17 +35,23 @@ namespace AuctionApp.Service.Infrastructur.Controllers
 
                 var userId = int.Parse(response);
 
+                // берём из нашего "хранилища победителей" ставки авторизируемого пользователя
                 var winBids = StaticValue.GetWinBidByUserId(userId);
 
+                // если они там есть
                 if (winBids != null)
                 {
+                    // строка с именами продуктов
                     var namesProduct = string.Empty;
 
+                    // теперь делаем строку с именами
                     foreach (var winBid in winBids)
                         namesProduct += "|" + winBid.Name;
 
+                    // удаляем из списка имена, которые "забрали"
                     StaticValue.DeleteWinBids(winBids);
 
+                    // вставляет в ответ
                     response += namesProduct;
                 }
 

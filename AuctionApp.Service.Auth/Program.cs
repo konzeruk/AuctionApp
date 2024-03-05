@@ -7,6 +7,7 @@ using AuctionApp.Service.Core.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 
+// внедрение зависимостей, по факту создание классов, которые будут использоваться внутри других
 services.AddSingleton<ILogger>(s => s.GetService<ILogger<AuthorizationMiddleware>>()!);
 services.AddSingleton<ApplicationContextAuth>();
 services.AddSingleton<IAuthEntityRepository, AuthEntityRepository>();

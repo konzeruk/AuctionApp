@@ -8,6 +8,7 @@ namespace AuctionApp.Services
 {
     internal static partial class AuctionApp
     {
+        // класс для отправки запросов в сервис торгов
         internal static class BargainingService
         {
             private const string addressController = "api/Bid";

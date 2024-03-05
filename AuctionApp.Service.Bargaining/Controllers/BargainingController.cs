@@ -45,6 +45,7 @@ namespace AuctionApp.Service.Bargaining.Controllers
             }
         }
 
+        // нужен для получения победителя в ставках
         [HttpGet("getWinBid/{productId:int}")]
         public async Task<ActionResult> GetWinBidAsync([FromRoute] int productId)
         {

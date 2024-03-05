@@ -1,12 +1,10 @@
 ﻿using AuctionApp.Service.Core.Models.DTO;
 using AuctionApp.Service.Core.Repositories;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System.Text.Json;
 
 namespace AuctionApp.Service.Auth.Middleware
 {
+    // middleware авторизации
     public class AuthorizationMiddleware
     {
         private readonly RequestDelegate next;
@@ -24,9 +22,11 @@ namespace AuctionApp.Service.Auth.Middleware
         {
             try
             {
+                // считывание данных из тела запроса
                 using StreamReader reader = new StreamReader(context.Request.Body);
                 string json = await reader.ReadToEndAsync();
 
+                // конвертация json в модель данных
                 var authModel = JsonConvert.DeserializeObject<AuthModel>(json);
 
                 if (authModel == null)
@@ -52,7 +52,6 @@ namespace AuctionApp.Service.Auth.Middleware
 
                         context.Response.StatusCode = 200;
                         await context.Response.WriteAsync(userEntity.Id.ToString());
-                        //await next.Invoke(context);
                     }
                 }
             }
