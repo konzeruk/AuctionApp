@@ -2,7 +2,7 @@
 
 namespace AuctionApp.Service.Core.Models.DTO
 {
-    public class ProductModel
+    public sealed class ProductModel
     {
         [JsonProperty("name")]
         public string Name { get; set; }

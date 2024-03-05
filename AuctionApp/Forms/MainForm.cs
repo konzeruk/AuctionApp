@@ -7,6 +7,7 @@ namespace AuctionApp.Forms
         private string? userId;
         private Dictionary<string, int> categorys;
 
+        //TODO: оттестить функционнал выигрыша и комменты добавить по всем фронтам
 
         public MainForm()
         {

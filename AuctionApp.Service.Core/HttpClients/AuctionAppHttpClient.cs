@@ -10,10 +10,10 @@ namespace AuctionApp.Service.Infrastructur.HttpClients
     public class AuctionAppHttpClient : IHttpClient
     {
         private HttpClient httpClient;
- 
         public AuctionAppHttpClient() =>
             httpClient = new HttpClient();
 
+        // метод для отправки запроса с параметром в body и с ответом
         public async Task<string?> SendRequestAsync<TRequest>(RequestModel requestModel, TRequest param) 
         {
             try
@@ -35,6 +35,7 @@ namespace AuctionApp.Service.Infrastructur.HttpClients
             }
         }
 
+        // метод для отправки запроса без параметром в body и с ответом
         public async Task<string?> SendRequestAsync(RequestModel requestModel)
         {
             try
@@ -54,6 +55,7 @@ namespace AuctionApp.Service.Infrastructur.HttpClients
             }
         }
 
+        // метод для отправки запроса с параметром в body и без ответа
         public async Task _SendRequestAsync<TRequest>(RequestModel requestModel, TRequest param)
         {
             try
@@ -73,6 +75,7 @@ namespace AuctionApp.Service.Infrastructur.HttpClients
             }
         }
 
+        // метод для отправки запроса без параметра в body и без ответа
         public async Task _SendRequestAsync(RequestModel requestModel)
         {
             try
@@ -90,6 +93,7 @@ namespace AuctionApp.Service.Infrastructur.HttpClients
             }
         }
 
+        // метод для отправки запроса (используется всеми методами выше)
         private async Task<HttpResponseMessage> SendRequestAsync(string baseAddress, HttpMethod httpMethod, string request, JsonContent? content)
         {
             try
@@ -108,6 +112,7 @@ namespace AuctionApp.Service.Infrastructur.HttpClients
             }
         }
 
+        // метод для преобразования параметра в json
         private JsonContent CreateJsonContent<TRequest>(TRequest param) =>
             JsonContent.Create(param);
     }

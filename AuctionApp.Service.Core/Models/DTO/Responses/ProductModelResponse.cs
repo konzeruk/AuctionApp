@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace AuctionApp.Service.Core.Models.DTO.Responses
 {
-    public class ProductModelResponse
+    public sealed class ProductModelResponse
     {
         [JsonProperty("id")]
         public int Id { get; set; }

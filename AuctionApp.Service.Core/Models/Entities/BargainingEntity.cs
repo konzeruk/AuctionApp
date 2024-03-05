@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AuctionApp.Service.Core.Models.Entities
 {
-    public class BargainingEntity
+    public sealed class BargainingEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

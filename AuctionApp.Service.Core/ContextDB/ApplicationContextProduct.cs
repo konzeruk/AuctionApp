@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AuctionApp.Service.Core.ContextDB
 {
+    /// <summary>
+    /// Контекст базы данных Product
+    /// </summary>
     public class ApplicationContextProduct : DbContext
     {
         public DbSet<ProductEntity> Product { get; set; } = null!;

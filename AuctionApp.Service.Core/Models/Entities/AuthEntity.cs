@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AuctionApp.Service.Core.Models.Entities
 {
-    public class AuthEntity
+    public sealed class AuthEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

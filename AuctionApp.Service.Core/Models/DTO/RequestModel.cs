@@ -1,6 +1,6 @@
 ﻿namespace AuctionApp.Service.Core.Models.DTO
 {
-    public class RequestModel
+    public sealed class RequestModel
     {
         public string BaseAddress { get; set; }
         public string Request {  get; set; }

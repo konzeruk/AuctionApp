@@ -2,7 +2,7 @@
 
 namespace AuctionApp.Service.Core.Models.DTO
 {
-    public class BargainingModel
+    public sealed class BargainingModel
     {
         [JsonProperty("userId")]
         public int UserId { get; set; }

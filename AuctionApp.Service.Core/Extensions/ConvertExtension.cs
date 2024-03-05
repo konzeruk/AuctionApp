@@ -4,8 +4,12 @@ using AuctionApp.Service.Core.Models.Entities;
 
 namespace AuctionApp.Service.Core.Extensions
 {
+    /// <summary>
+    /// Класс расширения для втроенного класса Convert
+    /// </summary>
     public static class ConvertExtension
     {
+        // методы преобразования типов данных друг друга
         public static ProductModelResponse ToProductModelResponse(this ProductEntity productEntity)=>
             new ProductModelResponse()
             {

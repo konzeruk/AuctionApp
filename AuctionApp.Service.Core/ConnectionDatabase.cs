@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AuctionApp.Service.Core
 {
+    /// <summary>
+    /// Класс с подключением к базам данных
+    /// </summary>
     public static class ConnectionDatabase
     {
         public static DbContext GetContextAuthDB(bool create = false) =>

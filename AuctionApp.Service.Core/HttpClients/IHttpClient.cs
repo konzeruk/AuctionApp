@@ -2,6 +2,7 @@
 
 namespace AuctionApp.Service.Core.HttpClients
 {
+    // интерфейс для HttpClient, который используется сервисом Infrastructur (для связи с другими сервисами) и клиентом (для связи с сервисом Infrastructur)
     public interface IHttpClient
     {
         public Task<string?> SendRequestAsync<TRequest>(RequestModel requestModel, TRequest param);
