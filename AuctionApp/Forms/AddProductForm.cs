@@ -22,11 +22,8 @@ namespace AuctionApp.Forms
         private void InitializeNumericUpDownPrice() =>
             numericUpDownPrice.Maximum = decimal.MaxValue;
 
-        private void InitializeDateTimePickerDateEnd()
-        {
+        private void InitializeDateTimePickerDateEnd() =>
             dateTimePickerDateEnd.MinDate = DateTime.Now;
-            dateTimePickerDateEnd.CustomFormat = "yyyy-mm-dd hh:mm:ss";
-        }
 
         private void InitializeComboBoxCategory(string[] categorys)
         {

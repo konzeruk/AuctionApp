@@ -54,5 +54,11 @@ namespace AuctionApp.Service.StorageProduct.Repositories
             .Category
             .Where(x => x.Id == id)
             .FirstOrDefaultAsync();
+
+        public async Task<IEnumerable<ProductEntity>?> GetAllProductAsync() =>
+            await context
+            .Product
+            .ToListAsync();
+
     }
 }

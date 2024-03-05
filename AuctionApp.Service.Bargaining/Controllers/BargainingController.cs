@@ -67,17 +67,17 @@ namespace AuctionApp.Service.Bargaining.Controllers
             }
         }
 
-        [HttpDelete("deleteBid/{categoryId:int}")]
-        public async Task<ActionResult> DeleteBidAsync([FromRoute] int categoryId)
+        [HttpDelete("deleteBid/{productId:int}")]
+        public async Task<ActionResult> DeleteBidAsync([FromRoute] int productId)
         {
             try
             {
-                logger.LogInformation($"HTTP: /deleteBid/{categoryId}");
+                logger.LogInformation($"HTTP: /deleteBid/{productId}");
 
-                if (categoryId < 0)
+                if (productId < 0)
                     throw new Exception(ExceptionsBargnainingApi.IncorrectProductId);
 
-                await repository.DeleteBidAsync(categoryId);
+                await repository.DeleteBidAsync(productId);
 
                 return Ok();
             }

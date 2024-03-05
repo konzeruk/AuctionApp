@@ -73,32 +73,6 @@ namespace AuctionApp.Service.Infrastructur.Controllers
             }
         }
 
-        [HttpDelete("deleteProduct/{id:int}")]
-        public async Task<ActionResult> DeleteProductAsync([FromRoute] int id)
-        {
-            try
-            {
-                logger.LogInformation($"HTTP: api/StorageProduct/deleteProduct");
-
-                var request = $"deleteProduct/{id}";
-
-                await httpClient._SendRequestAsync(new RequestModel()
-                {
-                    BaseAddress = servicesConfiguration[$"URL:{nameApi}"],
-                    Request = request,
-                    _HttpMethod = HttpMethod.Delete
-                });
-
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                logger.LogInformation($"{typeof(StorageProductController)}.DeleteProductAsync : {ex.Message}");
-
-                return Problem(ex.Message, statusCode: 500);
-            }
-        }
-
         [HttpGet("getAllProduct/{categoryId:int}")]
         public async Task<ActionResult> GetAllProductAsync([FromRoute] int categoryId)
         {

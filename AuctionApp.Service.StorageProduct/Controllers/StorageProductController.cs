@@ -166,5 +166,38 @@ namespace AuctionApp.Service.StorageProduct.Controllers
                 return Problem(ex.Message, statusCode: 500);
             }
         }
+
+        [HttpGet("getAllProductDate")]
+        public async Task<ActionResult> GetAllProductDateAsync()
+        {
+            try
+            {
+                logger.LogInformation($"HTTP: /getAllProductDate");
+
+                var commandResult = await repository.GetAllProductAsync();
+
+                if (commandResult == null)
+                    throw new Exception(ExceptionsStorageProductApi.NotProtucts);
+
+                var listProductEntity = commandResult.ToList();
+                var listProductDateModel = new List<ProductDateModel>();
+                foreach (var productEntity in listProductEntity)
+                    listProductDateModel.Add(new ProductDateModel()
+                    {
+                        Id = productEntity.Id,
+                        Name = productEntity.Name,
+                        DateEnd = productEntity.DateEnd
+                    });
+
+                return Ok(value: listProductDateModel);
+            }
+            catch (Exception ex)
+            {
+
+                logger.LogInformation($"{typeof(StorageProductController)}.GetAllProductDateAsync : {ex.Message}");
+
+                return Problem(ex.Message, statusCode: 500);
+            }
+        }
     }
 }

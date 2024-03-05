@@ -11,5 +11,7 @@
         public const string NotFoundCategoryById = "Категории с данным id нет";
 
         public const string NotCategory = "Категорий нет";
+
+        public const string NotProtucts = "Продукты не найдены";
     }
 }

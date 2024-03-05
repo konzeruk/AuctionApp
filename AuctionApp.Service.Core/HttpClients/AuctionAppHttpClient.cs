@@ -10,7 +10,7 @@ namespace AuctionApp.Service.Infrastructur.HttpClients
     public class AuctionAppHttpClient : IHttpClient
     {
         private HttpClient httpClient;
-
+ 
         public AuctionAppHttpClient() =>
             httpClient = new HttpClient();
 

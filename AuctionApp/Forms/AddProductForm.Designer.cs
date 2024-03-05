@@ -101,7 +101,6 @@
             // 
             // dateTimePickerDateEnd
             // 
-            dateTimePickerDateEnd.Format = DateTimePickerFormat.Custom;
             dateTimePickerDateEnd.Location = new Point(14, 165);
             dateTimePickerDateEnd.Name = "dateTimePickerDateEnd";
             dateTimePickerDateEnd.Size = new Size(255, 33);

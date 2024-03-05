@@ -46,57 +46,5 @@ namespace AuctionApp.Service.Infrastructur.Controllers
                 return Problem(ex.Message, statusCode: 500);
             }
         }
-
-        [HttpGet("getWinBid/{productId:int}")]
-        public async Task<ActionResult> GetWinBidAsync([FromRoute] int productId)
-        {
-            try
-            {
-                logger.LogInformation($"HTTP: api/Bid/getWinBid/{productId}");
-
-                var request = $"getWinBid/{productId}";
-
-                var response = await httpClient.SendRequestAsync(new RequestModel()
-                {
-                    BaseAddress = servicesConfiguration[$"URL:{nameApi}"],
-                    Request = request,
-                    _HttpMethod = HttpMethod.Get
-                });
-
-                return Ok(value: response);
-            }
-            catch (Exception ex)
-            {
-                logger.LogInformation($"{typeof(BidController)}.GetWinBidAsync : {ex.Message}");
-
-                return Problem(ex.Message, statusCode: 500);
-            }
-        }
-
-        [HttpDelete("deleteBid/{categoryId:int}")]
-        public async Task<ActionResult> DeleteBidAsync([FromRoute] int categoryId)
-        {
-            try
-            {
-                logger.LogInformation($"HTTP: api/Bid/deleteBid/{categoryId}");
-
-                var request = $"deleteBid/{categoryId}";
-
-                await httpClient._SendRequestAsync(new RequestModel()
-                {
-                    BaseAddress = servicesConfiguration[$"URL:{nameApi}"],
-                    Request = request,
-                    _HttpMethod = HttpMethod.Delete
-                });
-
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                logger.LogInformation($"{typeof(BidController)}.DeleteBidAsync : {ex.Message}");
-
-                return Problem(ex.Message, statusCode: 500);
-            }
-        }
     }
 }

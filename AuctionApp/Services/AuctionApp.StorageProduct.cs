@@ -3,7 +3,6 @@ using AuctionApp.Service.Core.Models.DTO.Responses;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Diagnostics;
-using System.Text.Json;
 
 namespace AuctionApp.Services
 {
@@ -71,37 +70,6 @@ namespace AuctionApp.Services
                     {
                         Value = null,
                         Status = $"{StatusResult.ERROR}: Не удалось поставить новую цену продукта"
-                    };
-                }
-            }
-
-            public static async Task<ResultModel<ProductModel>> DeleteProductAsync(int id)
-            {
-                try
-                {
-                    var request = $"deleteProduct/{id}";
-
-                    await httpClient._SendRequestAsync(new RequestModel()
-                    {
-                        BaseAddress = $"{baseAddress}/{addressController}",
-                        Request = request,
-                        _HttpMethod = HttpMethod.Delete
-                    });
-
-                    return new ResultModel<ProductModel>()
-                    {
-                        Value = null,
-                        Status = StatusResult.OK
-                    };
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex.Message);
-
-                    return new ResultModel<ProductModel>()
-                    {
-                        Value = null,
-                        Status = $"{StatusResult.ERROR}: Не удалось удалить продукт"
                     };
                 }
             }

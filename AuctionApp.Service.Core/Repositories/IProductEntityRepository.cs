@@ -17,5 +17,7 @@ namespace AuctionApp.Service.Core.Repositories
         public Task<IEnumerable<CategoryEntity>?> GetAllCategoryAsync();
 
         public Task<CategoryEntity?> GetCategoryByIdAsync(int id);
+
+        public Task<IEnumerable<ProductEntity>?> GetAllProductAsync();
     }
 }

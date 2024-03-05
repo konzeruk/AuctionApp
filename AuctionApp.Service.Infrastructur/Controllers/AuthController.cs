@@ -33,6 +33,22 @@ namespace AuctionApp.Service.Infrastructur.Controllers
                     _HttpMethod = HttpMethod.Get
                 }, authModel);
 
+                var userId = int.Parse(response);
+
+                var winBids = StaticValue.GetWinBidByUserId(userId);
+
+                if (winBids != null)
+                {
+                    var namesProduct = string.Empty;
+
+                    foreach (var winBid in winBids)
+                        namesProduct += "|" + winBid.Name;
+
+                    StaticValue.DeleteWinBids(winBids);
+
+                    response += namesProduct;
+                }
+
                 return Ok(value: response);
             }
             catch (Exception ex)

@@ -21,6 +21,8 @@ namespace AuctionApp.Forms
 
             InitializeListBoxCategory();
 
+            NotificationsWin();
+
             Visible = true;
 
         }
@@ -31,6 +33,15 @@ namespace AuctionApp.Forms
             authForm.ShowDialog();
 
             return authForm.userId;
+        }
+
+        private void NotificationsWin()
+        {
+            var namesProducts = Services.AuctionApp.AuthService.namesProducts;
+
+            if(namesProducts != null)
+                foreach (var name in namesProducts)
+                    MessageBox.Show($"Ваша ставка на товар {name} победила");
         }
 
         private void InitializeListBoxCategory()
