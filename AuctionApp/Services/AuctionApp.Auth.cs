@@ -25,7 +25,7 @@ namespace AuctionApp.Services
 
                     (var userId, var _namesProducts) = ConvertResponse(response);
 
-                    if (namesProducts != null)
+                    if (_namesProducts != null)
                         namesProducts = _namesProducts;
 
                     return new ResultModel<string>()

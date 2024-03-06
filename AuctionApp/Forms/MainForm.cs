@@ -22,9 +22,9 @@ namespace AuctionApp.Forms
 
             InitializeListBoxCategory();
 
-            NotificationsWin();
-
             Visible = true;
+
+            NotificationsWin();
 
         }
 
