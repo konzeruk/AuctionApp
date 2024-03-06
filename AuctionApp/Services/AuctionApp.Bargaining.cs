@@ -1,14 +1,10 @@
 ﻿using AuctionApp.Service.Core.Models.DTO;
-using Azure;
-using Newtonsoft.Json;
 using System.Diagnostics;
-using System.Text.Json;
 
 namespace AuctionApp.Services
 {
     internal static partial class AuctionApp
     {
-        // класс для отправки запросов в сервис торгов
         internal static class BargainingService
         {
             private const string addressController = "api/Bid";
