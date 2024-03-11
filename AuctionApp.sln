@@ -17,7 +17,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuctionApp.Service.StorageP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuctionApp.Service.Bargaining", "AuctionApp.Service.Bargaining\AuctionApp.Service.Bargaining.csproj", "{AE086131-C982-43E3-9E99-ECCEE9369A55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuctionApp.Service.Infrastructur", "AuctionApp.Service.Infrastructur\AuctionApp.Service.Infrastructur.csproj", "{A192E775-33EC-4771-8BE5-B21FCBD79DBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuctionApp.Service.Infrastructur", "AuctionApp.Service.Infrastructur\AuctionApp.Service.Infrastructur.csproj", "{A192E775-33EC-4771-8BE5-B21FCBD79DBB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{2F0B4C2F-D3E3-4504-9E0A-FC72E8EC1578}"
+	ProjectSection(SolutionItems) = preProject
+		ServiceApiAuth_Dockerfile = ServiceApiAuth_Dockerfile
+		ServiceApiBargaining_Dockerfile = ServiceApiBargaining_Dockerfile
+		ServiceApiInfrastructur_Dockerfile = ServiceApiInfrastructur_Dockerfile
+		ServiceApiStorageProduct_Dockerfile = ServiceApiStorageProduct_Dockerfile
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

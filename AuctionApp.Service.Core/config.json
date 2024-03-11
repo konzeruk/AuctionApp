@@ -1,5 +1,9 @@
 {
   "ConnectionStrings": {
+    "Docker_Auth": "Server=host.docker.internal,1433;Database=Auth;User Id=test1;Password=test1;TrustServerCertificate=True;",
+    "Docker_Product": "Server=host.docker.internal,1433;Database=Product;User Id=test1;Password=test1;TrustServerCertificate=True;",
+    "Docker_Bargaining": "Server=host.docker.internal,1433;Database=Bargaining;User Id=test1;Password=test1;TrustServerCertificate=True;",
+
     "Auth": "Server=BRUNGILDA\\SQLEXPRESS;Database=Auth;Integrated Security=True;TrustServerCertificate=True;",
     "Product": "Server=BRUNGILDA\\SQLEXPRESS;Database=Product;Integrated Security=True;TrustServerCertificate=True;",
     "Bargaining": "Server=BRUNGILDA\\SQLEXPRESS;Database=Bargaining;Integrated Security=True;TrustServerCertificate=True;"

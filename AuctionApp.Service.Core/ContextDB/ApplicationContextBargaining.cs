@@ -9,13 +9,18 @@ namespace AuctionApp.Service.Core.ContextDB
     public class ApplicationContextBargaining : DbContext
     {
         public DbSet<BargainingEntity> Bargaining { get; set; } = null!;
+
+        private bool create;
+
         public ApplicationContextBargaining(bool create = false)
         {
+            this.create = create;
+
             if (create)
                 Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
-            optionsBuilder.UseSqlServer(Utils.GetConnectionString(Constants.BargainingDB));
+            optionsBuilder.UseSqlServer(Utils.GetConnectionString((create) ? Constants.AuthDB : $"Docker_{Constants.BargainingDB}"));
     }
 }

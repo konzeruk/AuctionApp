@@ -1,0 +1,30 @@
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
+WORKDIR /app
+EXPOSE 80
+EXPOSE 7070
+
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+WORKDIR /src
+
+COPY ["AuctionApp.Service.Core/AuctionApp.Service.Core.csproj", "AuctionApp.Service.Core/"]
+RUN dotnet restore "AuctionApp.Service.Core/AuctionApp.Service.Core.csproj"
+
+COPY ["AuctionApp.Service.Infrastructur/AuctionApp.Service.Infrastructur.csproj", "AuctionApp.Service.Infrastructur/"]
+RUN dotnet restore "AuctionApp.Service.Infrastructur/AuctionApp.Service.Infrastructur.csproj"
+
+COPY . .
+
+WORKDIR "/src/AuctionApp.Service.Infrastructur"
+RUN dotnet build "AuctionApp.Service.Infrastructur.csproj" -c Debug -o /app/build -r win10-x64 --self-contained
+
+FROM build AS publish
+RUN dotnet publish "AuctionApp.Service.Infrastructur.csproj" -c Debug -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+
+ENV ASPNETCORE_URLS=http://+:7070
+ENV ASPNETCORE_ENVIRONMENT=Development
+
+ENTRYPOINT ["dotnet", "AuctionApp.Service.Infrastructur.dll"]

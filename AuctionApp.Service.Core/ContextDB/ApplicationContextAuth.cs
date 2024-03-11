@@ -10,9 +10,12 @@ namespace AuctionApp.Service.Core.ContextDB
     {
         // Коллекция, которая хранит данные из таблицы
         public DbSet<AuthEntity> Auth { get; set; } = null!;
-        
+
+        private bool create;
+
         public ApplicationContextAuth(bool create = false)
         {
+            this.create = create;
             // если create равно true, то создаётся бд     
             if (create)
                 Database.EnsureCreated();
@@ -20,7 +23,7 @@ namespace AuctionApp.Service.Core.ContextDB
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             // подключение к бд
-            optionsBuilder.UseSqlServer(Utils.GetConnectionString(Constants.AuthDB));
+            optionsBuilder.UseSqlServer(Utils.GetConnectionString((create) ? Constants.AuthDB : $"Docker_{Constants.AuthDB}"));
 
     }
 }

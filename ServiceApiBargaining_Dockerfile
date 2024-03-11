@@ -1,0 +1,30 @@
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
+WORKDIR /app
+EXPOSE 80
+EXPOSE 7474
+
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+WORKDIR /src
+
+COPY ["AuctionApp.Service.Core/AuctionApp.Service.Core.csproj", "AuctionApp.Service.Core/"]
+RUN dotnet restore "AuctionApp.Service.Core/AuctionApp.Service.Core.csproj"
+
+COPY ["AuctionApp.Service.Bargaining/AuctionApp.Service.Bargaining.csproj", "AuctionApp.Service.Bargaining/"]
+RUN dotnet restore "AuctionApp.Service.Bargaining/AuctionApp.Service.Bargaining.csproj"
+
+COPY . .
+
+WORKDIR "/src/AuctionApp.Service.Bargaining"
+RUN dotnet build "AuctionApp.Service.Bargaining.csproj" -c Debug -o /app/build -r win10-x64 --self-contained
+
+FROM build AS publish
+RUN dotnet publish "AuctionApp.Service.Bargaining.csproj" -c Debug -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+
+ENV ASPNETCORE_URLS=http://+:7474
+ENV ASPNETCORE_ENVIRONMENT=Docker
+
+ENTRYPOINT ["dotnet", "AuctionApp.Service.Bargaining.dll"]
